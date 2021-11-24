@@ -1,26 +1,35 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div v-if="loading" className="loading">
+    <h1>Loading...</h1>
+  </div>
+  <div v-else>
+    <Navbar />
+    <CartContainer />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import "./assets/style.css";
+import CartContainer from "./components/CartContainer";
+import Navbar from "./components/Navbar";
+import { mapState, mapMutations } from "vuex";
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  components: { CartContainer, Navbar },
+  data() {
+    return {};
+  },
+  computed: {
+    ...mapState(["loading"]),
+  },
+  methods: {
+    ...mapMutations(["getTotals"]),
+  },
+  mounted() {
+    this.getTotals();
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
